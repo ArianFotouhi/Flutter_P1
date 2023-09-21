@@ -55,22 +55,27 @@ class MyApp extends StatelessWidget {
                     image: AssetImage('images/toronto.jpg'),
                   ),
                 ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      color: Colors.black,
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 3, 0, 2),
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.black,
+                        ),
+                        Text('+1 514 142 1222'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.email,
+                          color: Colors.black,
+                        ),
+                        Text('evan@gmail.com'),
+                      ],
                     ),
-                    Text('+1 514 142 1222'),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Icon(
-                      Icons.email,
-                      color: Colors.black,
-                    ),
-                    Text('evan@gmail.com'),
-                  ],
+                  ),
                 )
               ],
             ),
