@@ -55,10 +55,17 @@ class MyApp extends StatelessWidget {
                     image: AssetImage('images/toronto.jpg'),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 3, 0, 2),
-                  child: Center(
+                SizedBox(
+                  height: 10,
+                  width: 250,
+                  child: Divider(color: Color(0xff00d70b)),
+                ),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.phone,
