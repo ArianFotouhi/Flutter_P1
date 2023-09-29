@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const BottomContainerHeight = 80.0;
+const activeContainerColor = Color(0xff323458);
+const bottomContainerColor = Color(0xffff3471);
+
 void main() => runApp(BMICalculator());
 
 class BMICalculator extends StatelessWidget {
@@ -42,19 +46,25 @@ class _InputPageState extends State<InputPage> {
             children: [
               Expanded(
                   child: ReusableContainer(
-                colour: Color(0xff323458),
+                colour: activeContainerColor,
               )),
-              Expanded(child: ReusableContainer(colour: Color(0xff323458)))
+              Expanded(child: ReusableContainer(colour: activeContainerColor))
             ],
           )),
-          Expanded(child: ReusableContainer(colour: Color(0xff323458))),
+          Expanded(child: ReusableContainer(colour: activeContainerColor)),
           Expanded(
               child: Row(
             children: [
-              Expanded(child: ReusableContainer(colour: Color(0xff323458))),
-              Expanded(child: ReusableContainer(colour: Color(0xff323458)))
+              Expanded(child: ReusableContainer(colour: activeContainerColor)),
+              Expanded(child: ReusableContainer(colour: activeContainerColor))
             ],
           )),
+          Container(
+            color: bottomContainerColor,
+            margin: EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: BottomContainerHeight,
+          )
         ],
       ),
     );
