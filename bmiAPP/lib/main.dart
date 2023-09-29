@@ -68,13 +68,13 @@ class _InputPageState extends State<InputPage> {
           Expanded(
               child: Row(
             children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    updateColor('man');
-                  });
-                },
-                child: Expanded(
+              Expanded(
+                child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        updateColor('man');
+                      });
+                    },
                     child: ReusableContainer(
                         colour: maleCardColor,
                         cardChild: IconContent(
@@ -82,20 +82,20 @@ class _InputPageState extends State<InputPage> {
                           label: 'Male',
                         ))),
               ),
-              GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      updateColor('female');
-                    });
-                  },
-                  child: Expanded(
-                    child: ReusableContainer(
-                        colour: femaleCardColor,
-                        cardChild: IconContent(
-                          icon: FontAwesomeIcons.venus,
-                          label: 'Female',
-                        )),
-                  ))
+              Expanded(
+                  child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    updateColor('female');
+                  });
+                },
+                child: ReusableContainer(
+                    colour: femaleCardColor,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.venus,
+                      label: 'Female',
+                    )),
+              )),
             ],
           )),
           Expanded(child: ReusableContainer(colour: activeCardColor)),
