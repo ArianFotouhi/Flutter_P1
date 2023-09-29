@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_container.dart';
+import 'icon_content.dart';
 
 const BottomContainerHeight = 80.0;
 const activeContainerColor = Color(0xff323458);
@@ -46,9 +49,19 @@ class _InputPageState extends State<InputPage> {
             children: [
               Expanded(
                   child: ReusableContainer(
-                colour: activeContainerColor,
-              )),
-              Expanded(child: ReusableContainer(colour: activeContainerColor))
+                      colour: activeContainerColor,
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'Male',
+                      ))),
+              Expanded(
+                child: ReusableContainer(
+                    colour: activeContainerColor,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.venus,
+                      label: 'Female',
+                    )),
+              )
             ],
           )),
           Expanded(child: ReusableContainer(colour: activeContainerColor)),
@@ -67,21 +80,6 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
-    );
-  }
-}
-
-class ReusableContainer extends StatelessWidget {
-  ReusableContainer({required this.colour});
-  final Color? colour;
-  @override
-  Widget build(BuildContext context) {
-    // Implement the widget's UI by returning a widget tree
-    return Container(
-      margin: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          color: colour ?? Colors.transparent,
-          borderRadius: BorderRadius.circular(10)),
     );
   }
 }
