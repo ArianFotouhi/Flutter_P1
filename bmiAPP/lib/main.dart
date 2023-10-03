@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_container.dart';
 import 'icon_content.dart';
-
-const BottomContainerHeight = 80.0;
-const activeCardColor = Color(0xff323458);
-const inactiveCardColor = Color(0xff11111f);
-const bottomContainerColor = Color(0xffff3471);
+import 'constants.dart';
 
 void main() => runApp(BMICalculator());
 
@@ -37,23 +33,25 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
+  int height = 180;
+
+  Color maleCardColor = kInactiveCardColor;
+  Color femaleCardColor = kInactiveCardColor;
   void updateColor(String gender) {
     if (gender == 'man') {
-      if (maleCardColor == activeCardColor) {
-        maleCardColor = inactiveCardColor;
+      if (maleCardColor == kActiveCardColor) {
+        maleCardColor = kInactiveCardColor;
       } else {
-        maleCardColor = activeCardColor;
+        maleCardColor = kActiveCardColor;
       }
-      femaleCardColor = inactiveCardColor;
+      femaleCardColor = kInactiveCardColor;
     } else {
-      if (femaleCardColor == activeCardColor) {
-        femaleCardColor = inactiveCardColor;
+      if (femaleCardColor == kActiveCardColor) {
+        femaleCardColor = kInactiveCardColor;
       } else {
-        femaleCardColor = activeCardColor;
+        femaleCardColor = kActiveCardColor;
       }
-      maleCardColor = inactiveCardColor;
+      maleCardColor = kInactiveCardColor;
     }
   }
 
@@ -98,19 +96,49 @@ class _InputPageState extends State<InputPage> {
               )),
             ],
           )),
-          Expanded(child: ReusableContainer(colour: activeCardColor)),
+          Expanded(
+              child: ReusableContainer(
+            colour: kActiveCardColor,
+            cardChild:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text('Height', style: kLabelTextStyle),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    height.toString(),
+                    style: kNumberTextStyle,
+                  ),
+                  Text('cm', style: kLabelTextStyle),
+                ],
+              ),
+              Slider(
+                  value: height.toDouble(),
+                  min: 120,
+                  max: 220,
+                  // activeColor: Color(0xFFEB1555),
+                  // inactiveColor: Color(0xFF8D8E98),
+                  onChanged: (double value) {
+                    setState(() {
+                      height = value.round();
+                    });
+                  })
+            ]),
+          )),
           Expanded(
               child: Row(
             children: [
-              Expanded(child: ReusableContainer(colour: activeCardColor)),
-              Expanded(child: ReusableContainer(colour: activeCardColor))
+              Expanded(child: ReusableContainer(colour: kActiveCardColor)),
+              Expanded(child: ReusableContainer(colour: kActiveCardColor))
             ],
           )),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             margin: EdgeInsets.only(top: 10),
             width: double.infinity,
-            height: BottomContainerHeight,
+            height: kBottomContainerHeight,
           )
         ],
       ),
