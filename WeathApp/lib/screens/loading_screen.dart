@@ -5,6 +5,7 @@ import '../services/networking.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+// open weather map API
 const apiKey = 'd6230bcde1fd2213019455f7789e139e';
 
 class LoadingScreen extends StatefulWidget {

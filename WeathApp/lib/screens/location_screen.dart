@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utilities/constants.dart';
 import 'dart:convert';
+import '../services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -14,6 +15,8 @@ class _LocationScreenState extends State<LocationScreen> {
   int temperature = 0;
   int condition = 0;
   String cityName = '';
+  String weatherMessage = '';
+  String weatherIcon = '';
 
   @override
   void initState() {
@@ -26,8 +29,11 @@ class _LocationScreenState extends State<LocationScreen> {
 
     double temp = data['main']['temp'];
     temperature = temp.toInt();
-
+    WeatherModel weather = WeatherModel();
     condition = data['weather'][0]['id'];
+    weatherIcon = weather.getWeatherIcon(condition);
+    weatherMessage = weather.getMessage(temperature);
+
     cityName = data['name'];
     print(temperature);
     print(condition);
@@ -80,7 +86,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      weatherIcon,
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -89,7 +95,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in $cityName!",
+                  "$weatherMessage in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
