@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -8,15 +10,38 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String? selectedCurrency = 'USD';
-
-  List<DropdownMenuItem> getDropdownItems() {
-    List<DropdownMenuItem> dropdownItems = [];
+  DropdownButton<String?> androidDropdownButton() {
+    List<DropdownMenuItem<String>> dropdownItems = [];
     for (int i = 0; i < currenciesList.length; i++) {
       String currency = currenciesList[i];
       var newItem = DropdownMenuItem(child: Text(currency), value: currency);
       dropdownItems.add(newItem);
     }
-    return dropdownItems;
+
+    return DropdownButton<String?>(
+      value: selectedCurrency,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(() {
+          selectedCurrency = value;
+        });
+      },
+    );
+  }
+
+  CupertinoPicker iOSpicker() {
+    List<Text> pickerItems = [];
+
+    for (String currency in currenciesList) {
+      pickerItems.add(Text(currency));
+    }
+
+    return CupertinoPicker(
+      backgroundColor: Colors.lightBlue,
+      itemExtent: 32.0,
+      onSelectedItemChanged: (selectedIndex) {},
+      children: pickerItems,
+    );
   }
 
   @override
@@ -55,15 +80,8 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: DropdownButton(
-              value: selectedCurrency,
-              items: getDropdownItems(),
-              onChanged: (value) {
-                setState(() {
-                  selectedCurrency = value;
-                });
-              },
-            ),
+            // child: Platform.isIOS ? iOSpicker() : androidDropdownButton(),
+            child: androidDropdownButton(),
           ),
         ],
       ),
