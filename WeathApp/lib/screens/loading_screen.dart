@@ -1,8 +1,11 @@
-import 'dart:convert';
-
+import 'package:climateflutter/screens/location_screen.dart';
 import 'package:flutter/material.dart';
 import '../services/location.dart';
-import 'package:http/http.dart' as http;
+import '../services/networking.dart';
+import 'location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+const apiKey = 'd6230bcde1fd2213019455f7789e139e';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -10,48 +13,35 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double lat = 0;
+  double lon = 0;
+
   @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  void getLocation() async {
+  void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
-  }
+    lat = location.latitude;
+    lon = location.longitude;
 
-  void getData() async {
-    double lat = 37;
-    double lon = -122;
-    String apiKey = 'd6230bcde1fd2213019455f7789e139e';
-    Uri apiUrl = Uri.parse(
+    NetworkHelper networkHelper = NetworkHelper(
         'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey');
 
-    http.Response response = await http.get(apiUrl);
-    String data = response.body;
-    var temperature = jsonDecode(data)['main']['temp'];
-    var condition = jsonDecode(data)['weather'][0]['id'];
-    var cityName = jsonDecode(data)['name'];
-    print(data);
-    print(temperature);
-    print(condition);
-    print(cityName);
+    var weatherData = await networkHelper.getData();
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return LocationScreen();
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
-    getData();
-
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            getLocation();
-          },
-          child: Text('Get Location'),
-        ),
-      ),
+      body:
+          Center(child: SpinKitDoubleBounce(color: Colors.white, size: 100.0)),
     );
   }
 }
