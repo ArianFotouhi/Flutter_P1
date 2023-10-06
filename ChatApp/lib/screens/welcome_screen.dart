@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'registration_screen.dart';
@@ -48,7 +49,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     controller.addListener(() {
       setState(() {});
-      print(animation.value);
     });
   }
 
@@ -71,12 +71,30 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: controller.value * 60,
                   ),
                 ),
-                Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: animation.value * 40,
-                    fontWeight: FontWeight.w900,
+
+                // TypewriterAnimatedText(
+                //   animatedTexts:['Flash Chat'],
+                //   textStyle: TextStyle(
+                //     color: Colors.white,
+                //     fontSize: animation.value * 40,
+                //     fontWeight: FontWeight.w900,
+                //   ),
+                // ),
+
+                DefaultTextStyle(
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Agne',
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w700),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      WavyAnimatedText('Flash Chat'),
+                    ],
+                    isRepeatingAnimation: false,
+                    onTap: () {
+                      print("Tap Event");
+                    },
                   ),
                 ),
               ],
