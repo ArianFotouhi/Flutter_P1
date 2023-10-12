@@ -30,4 +30,8 @@ void updateTask(Task task){
 
 }
 
+void deleteTask(Task task){
+  _tasks.remove(task);
+  notifyListeners();
+}
 }
