@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../models/task.dart';
+import '../models/task_data.dart';
+import 'package:provider/provider.dart';
+
 
 class AddTaskScreen extends StatelessWidget {
   final Function addTaskCallBack; // Define the callback as a class field
@@ -37,7 +41,8 @@ class AddTaskScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Call the callback function when the button is pressed
-                addTaskCallBack(newTaskTitle);
+               Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+               Navigator.pop(context);
               },
               child: Text(
                 'Add',
