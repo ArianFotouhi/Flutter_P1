@@ -67,7 +67,7 @@ class FlutterMapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text('${_distance.toString()}')),
+      appBar: AppBar(title:  Text('Map')),
       body: FlutterMap(
         options: MapOptions(
           center: _center,
